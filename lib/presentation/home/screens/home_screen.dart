@@ -35,8 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
           SliverToBoxAdapter(child: HorizontalMovieList()),
 
           SliverToBoxAdapter(child: SectionTitle(title: 'My List')),
+        
           SliverToBoxAdapter(child: HorizontalMovieList()),
-
           SliverToBoxAdapter(child: NetflixShopBannerWithSlider()),
 
           SliverToBoxAdapter(child: SectionTitle(title: 'Gems for You')),
