@@ -16,8 +16,8 @@ class NetflixShopBannerWithSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 250,
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
@@ -68,7 +68,11 @@ class NetflixShopBannerWithSlider extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Exclusive limited editions of carefully selected high-quality apparel and lifestyle products tied to our shows and brand on a regular basis',
-                    style: const TextStyle(color: Colors.white, fontSize: 11.5),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -93,7 +97,11 @@ class NetflixShopBannerWithSlider extends StatelessWidget {
                   onPressed: onShopPressed,
                   child: const Text(
                     'Go to shop',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],

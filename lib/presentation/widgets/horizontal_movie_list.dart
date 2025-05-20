@@ -5,14 +5,12 @@ class HorizontalMovieList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final List<String> imagePaths = [
       'assets/images/m5.png',
-      'assets/images/m6.png', 
+      'assets/images/m6.png',
       'assets/images/m7.png',
       'assets/images/m8.png',
       'assets/images/m9.png',
-
     ];
 
     return SizedBox(
