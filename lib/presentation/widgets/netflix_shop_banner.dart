@@ -68,11 +68,9 @@ class NetflixShopBannerWithSlider extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Exclusive limited editions of carefully selected high-quality apparel and lifestyle products tied to our shows and brand on a regular basis',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.normal,
-                    ),
+                    style: const TextStyle(color: Colors.white, fontSize: 12
+                        , fontWeight: FontWeight.normal
+                        ),
                   ),
                 ),
                 const SizedBox(height: 12),
