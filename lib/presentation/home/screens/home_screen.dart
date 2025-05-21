@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:netflixapp/presentation/widgets/netflix_shop_banner.dart';
+import 'package:netflixapp/widgets/netflix_shop_banner.dart';
 
-import '../../widgets/section_title.dart';
-import '../../widgets/horizontal_movie_list.dart';
+import '../../../widgets/section_title.dart';
+import '../../../widgets/horizontal_movie_list.dart';
 
-import '../../widgets/header_banner.dart';
+import '../../../widgets/header_banner.dart';
 
 
 class HomeScreen extends StatefulWidget {
