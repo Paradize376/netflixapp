@@ -5,7 +5,7 @@ import '../../widgets/section_title.dart';
 import '../../widgets/horizontal_movie_list.dart';
 
 import '../../widgets/header_banner.dart';
-import '../../widgets/custom_bottom_navigation_bar.dart'; 
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -49,10 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SliverToBoxAdapter(child: HorizontalMovieList()),
         ],
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onTap,
-      ),
+      
     );
   }
 }
