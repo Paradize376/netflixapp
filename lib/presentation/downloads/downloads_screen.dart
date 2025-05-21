@@ -8,7 +8,6 @@ class DownloadsScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-           
             Container(
               color: Colors.black.withOpacity(0.8),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -17,16 +16,9 @@ class DownloadsScreen extends StatelessWidget {
                   Expanded(
                     child: Text(
                       'Downloads',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),
+                      style: TextStyle(color: Colors.white, fontSize: 18),
                       textAlign: TextAlign.center,
                     ),
-                  ),
-                  Icon(
-                    Icons.close,
-                    color: Colors.white,
                   ),
                 ],
               ),
@@ -109,9 +101,6 @@ class DownloadsScreen extends StatelessWidget {
                     imageUrl: 'assets/images/m1.png',
                     isDownloaded: false,
                   ),
-
-                 
-
                 ],
               ),
             ),
@@ -154,9 +143,23 @@ class _EpisodeTile extends StatelessWidget {
                 alignment: Alignment.center,
                 children: [
                   isAsset
-                      ? Image.asset(imageUrl, width: 120, height: 70, fit: BoxFit.cover)
-                      : Image.network(imageUrl, width: 120, height: 70, fit: BoxFit.cover),
-                  Icon(Icons.play_circle_outline, color: Colors.white, size: 36),
+                      ? Image.asset(
+                        imageUrl,
+                        width: 120,
+                        height: 70,
+                        fit: BoxFit.cover,
+                      )
+                      : Image.network(
+                        imageUrl,
+                        width: 120,
+                        height: 70,
+                        fit: BoxFit.cover,
+                      ),
+                  Icon(
+                    Icons.play_circle_outline,
+                    color: Colors.white,
+                    size: 36,
+                  ),
                 ],
               ),
               SizedBox(width: 12),
@@ -166,7 +169,10 @@ class _EpisodeTile extends StatelessWidget {
                   children: [
                     Text(
                       '$episodeNumber. $title',
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Text(
                       duration,
