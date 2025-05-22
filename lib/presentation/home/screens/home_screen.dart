@@ -12,61 +12,88 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<String> sectionTitles = [
-    'Continue Watching for Eron',
-    'My List',
-    'Gems for You',
-    'Romance/Drama',
-    'Action/Thriller',
+  final Map<String, List<String>> sectionImages = {
+    'Continue Watching for Eron': [
+      'assets/images/m5.png',
+      'assets/images/m6.png',
+      'assets/images/m6.png',
+      'assets/images/m6.png',
+      
+    ],
+    'My List': [
+      'assets/images/m7.png',
+      'assets/images/m8.png',
+      'assets/images/m6.png',
+      'assets/images/m6.png',
+    ],
+    'Gems for You': [
+      'assets/images/m9.png',
+      'assets/images/m5.png',
+      'assets/images/m6.png',
+      'assets/images/m6.png',
+    ],
+    'Romance/Drama': [
+      'assets/images/m6.png',
+      'assets/images/m7.png',
+      'assets/images/m6.png',
+      'assets/images/m6.png',
+    ],
+    'Action/Thriller': [
+      'assets/images/m8.png',
+      'assets/images/m9.png',
+      'assets/images/m6.png',
+      'assets/images/m6.png',
+    ],
+  };
+
+  late final List<Map<String, dynamic>> sections = [
+    {
+      'title': 'Continue Watching for Eron',
+      'widget': HorizontalMovieList(
+        imagePaths: sectionImages['Continue Watching for Eron']!,
+      ),
+    },
+    {
+      'title': 'My List',
+      'widget': HorizontalMovieList(imagePaths: sectionImages['My List']!),
+    },
+    {'banner': const NetflixShopBannerWithSlider()},
+    {
+      'title': 'Gems for You',
+      'widget': HorizontalMovieList(imagePaths: sectionImages['Gems for You']!),
+    },
+    
+    
   ];
-
-  int _currentIndex = 0;
-
-  void _onTap(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> sections = [
-      {
-        'title': 'My List',
-        'widget': HorizontalMovieList(),
-      },
-      {
-        'banner': NetflixShopBannerWithSlider(),
-      },
-      {
-        'title': 'Gems for You',
-        'widget': HorizontalMovieList(),
-      },
-    ];
-
     return Scaffold(
       backgroundColor: Colors.black,
       body: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(child: HeaderBanner()),
-          ...sections.map((section) {
-            if (section.containsKey('banner')) {
-              return SliverToBoxAdapter(child: section['banner']);
-            }
-            return Column(
-              children: [
-                SectionTitle(title: section['title']),
-                section['widget'],
-              ],
-            );
-          }).expand((widget) {
-            // แปลง Column ให้เป็น SliverToBoxAdapter
-            if (widget is Column) {
-              return widget.children
-                  .map((child) => SliverToBoxAdapter(child: child));
-            }
-            return [widget];
-          }).toList(),
+          const SliverToBoxAdapter(child: HeaderBanner()),
+          ...sections
+              .map((section) {
+                if (section.containsKey('banner')) {
+                  return SliverToBoxAdapter(child: section['banner']);
+                }
+                return Column(
+                  children: [
+                    SectionTitle(title: section['title']),
+                    section['widget'],
+                  ],
+                );
+              })
+              .expand((widget) {
+                if (widget is Column) {
+                  return widget.children.map(
+                    (child) => SliverToBoxAdapter(child: child),
+                  );
+                }
+                return [widget];
+              })
+              .toList(),
         ],
       ),
     );
