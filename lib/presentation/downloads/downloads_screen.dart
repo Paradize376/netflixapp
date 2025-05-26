@@ -126,17 +126,17 @@ class _EpisodeTile extends StatelessWidget {
                 children: [
                   isAsset
                       ? Image.asset(
-                          imageUrl,
-                          width: 120,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        )
+                        imageUrl,
+                        width: 120,
+                        height: 70,
+                        fit: BoxFit.cover,
+                      )
                       : Image.network(
-                          imageUrl,
-                          width: 120,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        ),
+                        imageUrl,
+                        width: 120,
+                        height: 70,
+                        fit: BoxFit.cover,
+                      ),
                   const Icon(
                     Icons.play_circle_outline,
                     color: Colors.white,
