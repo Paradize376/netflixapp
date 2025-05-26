@@ -1,6 +1,38 @@
 import 'package:flutter/material.dart';
 
+// Episode Model
+class Episode {
+  final int number;
+  final String title;
+  final String duration;
+  final String description;
+  final String imageUrl;
+  final bool isDownloaded;
+
+  const Episode({
+    required this.number,
+    required this.title,
+    required this.duration,
+    required this.description,
+    required this.imageUrl,
+    required this.isDownloaded,
+  });
+}
+
 class DownloadsScreen extends StatelessWidget {
+  final List<Episode> episodes = List.generate(7, (index) {
+    final number = index + 1;
+    return Episode(
+      number: number,
+      title: 'Episode $number',
+      duration: '57m',
+      description:
+          'Montague’s public standing sours further. As Budd feels mounting pressure to spy on her, investigators question his statement about the shooting.',
+      imageUrl: 'assets/images/m1.png',
+      isDownloaded: number <= 2,
+    );
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +43,7 @@ class DownloadsScreen extends StatelessWidget {
             Container(
               color: Colors.black.withOpacity(0.8),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Row(
+              child: const Row(
                 children: [
                   Expanded(
                     child: Text(
@@ -24,84 +56,34 @@ class DownloadsScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ListView(
+              child: ListView.builder(
                 padding: EdgeInsets.zero,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 16, 0, 8),
-                    child: Text(
-                      'Season 1',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                itemCount: episodes.length + 1,
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return const Padding(
+                      padding: EdgeInsets.fromLTRB(16, 16, 0, 8),
+                      child: Text(
+                        'Season 1',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                  ),
-                  _EpisodeTile(
-                    episodeNumber: 1,
-                    title: 'Episode 1',
-                    duration: '58m',
-                    description:
-                        'Sgt. David Budd is promoted to a protection detail for UK Home Secretary Julia Montague, but he quickly clashes with the hawkish politician.',
-                    imageUrl: 'assets/images/m1.png',
-                    isDownloaded: true,
-                  ),
-                  _EpisodeTile(
-                    episodeNumber: 2,
-                    title: 'Episode 2',
-                    duration: '58m',
-                    description:
-                        'After an attempted attack on the school Budd’s kids attend, Montague worries about leaks in the department. But she may be in the line of fire herself.',
-                    imageUrl: 'assets/images/m1.png',
-                    isDownloaded: true,
-                  ),
-                  _EpisodeTile(
-                    episodeNumber: 3,
-                    title: 'Episode 3',
-                    duration: '57m',
-                    description:
-                        'Montague’s public standing sours further. As Budd feels mounting pressure to spy on her, investigators question his statement about the shooting.',
-                    imageUrl: 'assets/images/m1.png',
-                    isDownloaded: false,
-                  ),
-                  _EpisodeTile(
-                    episodeNumber: 4,
-                    title: 'Episode 4',
-                    duration: '57m',
-                    description:
-                        'In the wake of another attack, investigators grow suspicious of Budd’s involvement.',
-                    imageUrl: 'assets/images/m1.png',
-                    isDownloaded: false,
-                  ),
-                  _EpisodeTile(
-                    episodeNumber: 5,
-                    title: 'Episode 5',
-                    duration: '57m',
-                    description:
-                        'Montague’s public standing sours further. As Budd feels mounting pressure to spy on her, investigators question his statement about the shooting.',
-                    imageUrl: 'assets/images/m1.png',
-                    isDownloaded: false,
-                  ),
-                  _EpisodeTile(
-                    episodeNumber: 6,
-                    title: 'Episode 6',
-                    duration: '57m',
-                    description:
-                        'Montague’s public standing sours further. As Budd feels mounting pressure to spy on her, investigators question his statement about the shooting.',
-                    imageUrl: 'assets/images/m1.png',
-                    isDownloaded: false,
-                  ),
-                  _EpisodeTile(
-                    episodeNumber: 7,
-                    title: 'Episode 7',
-                    duration: '57m',
-                    description:
-                        'Montague’s public standing sours further. As Budd feels mounting pressure to spy on her, investigators question his statement about the shooting.',
-                    imageUrl: 'assets/images/m1.png',
-                    isDownloaded: false,
-                  ),
-                ],
+                    );
+                  }
+
+                  final e = episodes[index - 1];
+                  return _EpisodeTile(
+                    episodeNumber: e.number,
+                    title: e.title,
+                    duration: e.duration,
+                    description: e.description,
+                    imageUrl: e.imageUrl,
+                    isDownloaded: e.isDownloaded,
+                  );
+                },
               ),
             ),
           ],
@@ -144,39 +126,39 @@ class _EpisodeTile extends StatelessWidget {
                 children: [
                   isAsset
                       ? Image.asset(
-                        imageUrl,
-                        width: 120,
-                        height: 70,
-                        fit: BoxFit.cover,
-                      )
+                          imageUrl,
+                          width: 120,
+                          height: 70,
+                          fit: BoxFit.cover,
+                        )
                       : Image.network(
-                        imageUrl,
-                        width: 120,
-                        height: 70,
-                        fit: BoxFit.cover,
-                      ),
-                  Icon(
+                          imageUrl,
+                          width: 120,
+                          height: 70,
+                          fit: BoxFit.cover,
+                        ),
+                  const Icon(
                     Icons.play_circle_outline,
                     color: Colors.white,
                     size: 36,
                   ),
                 ],
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       '$episodeNumber. $title',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       duration,
-                      style: TextStyle(color: Colors.grey, fontSize: 12),
+                      style: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                   ],
                 ),
@@ -187,10 +169,10 @@ class _EpisodeTile extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             description,
-            style: TextStyle(color: Colors.white70, fontSize: 13),
+            style: const TextStyle(color: Colors.white70, fontSize: 13),
           ),
         ],
       ),
