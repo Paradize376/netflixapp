@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late final Map<String, List<String>> sectionImages = {
     for (var title in sectionTitles)
-      title: List.generate(4, (i) => imagePool[i % imagePool.length]),
+      title: List.generate(5, (i) => imagePool[i % imagePool.length]),
   };
 
   List<Widget> _buildSliverSections() {

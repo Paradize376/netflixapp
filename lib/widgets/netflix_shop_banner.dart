@@ -16,7 +16,7 @@ class NetflixShopBannerWithSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 250,
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(7),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         gradient: const LinearGradient(

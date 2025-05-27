@@ -20,7 +20,7 @@ class Episode {
 }
 
 class DownloadsScreen extends StatelessWidget {
-  final List<Episode> episodes = List.generate(7, (index) {
+  final List<Episode> episodes = List.generate(10, (index) {
     final number = index + 1;
     return Episode(
       number: number,
