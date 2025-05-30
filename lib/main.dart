@@ -14,14 +14,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => HomeViewModel()),
-   
-      ],
+      providers: [ChangeNotifierProvider(create: (_) => HomeViewModel())],
       child: MaterialApp(
         title: 'Netflix Clone',
         theme: ThemeData.dark(),
-        home: MainScreen(), 
+        home: MainScreen(),
       ),
     );
   }
@@ -58,22 +55,13 @@ class _MainScreenState extends State<MainScreen> {
         onTap: _onTabTapped,
         type: BottomNavigationBarType.fixed,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
           BottomNavigationBarItem(
             icon: Icon(Icons.download),
             label: 'Downloads',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: 'More',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'More'),
         ],
       ),
     );

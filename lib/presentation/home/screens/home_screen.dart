@@ -18,7 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
       'assets/images/m6.png',
       'assets/images/m6.png',
       'assets/images/m6.png',
-      
     ],
     'My List': [
       'assets/images/m7.png',
@@ -29,18 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
     'Gems for You': [
       'assets/images/m9.png',
       'assets/images/m5.png',
-      'assets/images/m6.png',
-      'assets/images/m6.png',
-    ],
-    'Romance/Drama': [
-      'assets/images/m6.png',
-      'assets/images/m7.png',
-      'assets/images/m6.png',
-      'assets/images/m6.png',
-    ],
-    'Action/Thriller': [
-      'assets/images/m8.png',
-      'assets/images/m9.png',
       'assets/images/m6.png',
       'assets/images/m6.png',
     ],
@@ -62,8 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
       'title': 'Gems for You',
       'widget': HorizontalMovieList(imagePaths: sectionImages['Gems for You']!),
     },
-    
-    
   ];
 
   @override
