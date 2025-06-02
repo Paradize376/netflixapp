@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:netflixapp/widgets/netflix_shop_banner.dart';
-import '../../../widgets/section_title.dart';
-import '../../../widgets/horizontal_movie_list.dart';
-import '../../../widgets/header_banner.dart';
+import 'package:netflixapp/shared/widgets/netflix_shop_banner.dart';
+import '../../../../shared/widgets/section_title.dart';
+import '../../../../shared/widgets/horizontal_movie_list.dart';
+import '../../../../shared/widgets/header_banner.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

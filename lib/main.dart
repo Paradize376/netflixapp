@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'presentation/home/screens/home_screen.dart';
-import 'presentation/home/viewmodel/home_viewmodel.dart';
-import 'presentation/downloads/downloads_screen.dart';
+import 'features/home/presentation/screens/home_screen.dart';
+import 'features/home/presentation/viewmodel/home_viewmodel.dart';
+import 'features/home/presentation/downloads/downloads_screen.dart';
 
 void main() {
   runApp(const MyApp());
