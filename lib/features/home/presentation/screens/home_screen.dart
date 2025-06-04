@@ -3,6 +3,8 @@ import 'package:netflixapp/shared/widgets/netflix_shop_banner.dart';
 import '../../../../shared/widgets/section_title.dart';
 import '../../../../shared/widgets/horizontal_movie_list.dart';
 import '../../../../shared/widgets/header_banner.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,86 +14,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-<<<<<<< HEAD:lib/features/home/presentation/screens/home_screen.dart
-  final Map<String, List<String>> sectionImages = {
-    'Continue Watching for Eron': [
-      'assets/images/m5.png',
-      'assets/images/m6.png',
-      'assets/images/m6.png',
-      'assets/images/m6.png',
-    ],
-    'My List': [
-      'assets/images/m7.png',
-      'assets/images/m8.png',
-      'assets/images/m6.png',
-      'assets/images/m6.png',
-    ],
-    'Gems for You': [
-      'assets/images/m9.png',
-      'assets/images/m5.png',
-      'assets/images/m6.png',
-      'assets/images/m6.png',
-    ],
-  };
-
-  late final List<Map<String, dynamic>> sections = [
-    {
-      'title': 'Continue Watching for Eron',
-      'widget': HorizontalMovieList(
-        imagePaths: sectionImages['Continue Watching for Eron']!,
-      ),
-    },
-    {
-      'title': 'My List',
-      'widget': HorizontalMovieList(imagePaths: sectionImages['My List']!),
-    },
-    {'banner': const NetflixShopBannerWithSlider()},
-    {
-      'title': 'Gems for You',
-      'widget': HorizontalMovieList(imagePaths: sectionImages['Gems for You']!),
-    },
-  ];
-=======
-  final List<String> imagePool = [
-    'assets/images/m5.png',
-    'assets/images/m6.png',
-    'assets/images/m7.png',
-    'assets/images/m8.png',
-    'assets/images/m9.png',
-  ];
-
-  final List<String> sectionTitles = [
-    'Continue Watching for Eron',
-    'My List',
-    'Gems for You',
-    'Romance/Drama',
-    'Action/Thriller',
-  ];
-
-  late final Map<String, List<String>> sectionImages = {
-    for (var title in sectionTitles)
-      title: List.generate(5, (i) => imagePool[i % imagePool.length]),
-  };
-
-  List<Widget> _buildSliverSections() {
-    final List<Widget> slivers = [];
-
-    sectionImages.forEach((title, images) {
-      slivers.addAll([
-        SliverToBoxAdapter(child: SectionTitle(title: title)),
-        SliverToBoxAdapter(child: HorizontalMovieList(imagePaths: images)),
-      ]);
-    });
-
-    // เพิ่ม banner หลัง section 2
-    slivers.insert(
-      4,
-      const SliverToBoxAdapter(child: NetflixShopBannerWithSlider()),
+  Future<List<Map<String, dynamic>>> fetchSections() async {
+    final response = await http.post(
+      Uri.parse('https://crmotions.ibusiness.co.th/netfixapi/api/movie'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({}),
     );
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
 
-    return slivers;
+      return List<Map<String, dynamic>>.from(data['data']);
+    } else {
+      throw Exception('Failed to load sections');
+    }
   }
->>>>>>> 3273c98da459bfdd92a70a7f347c51e6be960505:lib/presentation/home/screens/home_screen.dart
 
   @override
   Widget build(BuildContext context) {
@@ -100,8 +36,112 @@ class _HomeScreenState extends State<HomeScreen> {
       body: CustomScrollView(
         slivers: [
           const SliverToBoxAdapter(child: HeaderBanner()),
-          ..._buildSliverSections(),
+          SliverToBoxAdapter(
+            child: FutureBuilder<List<Map<String, dynamic>>>(
+              future: fetchSections(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // Skeleton Loading
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
+                        width: 180,
+                        height: 24,
+                        color: Colors.grey[800],
+                      ),
+                      SizedBox(
+                        height: 200,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 6,
+                          itemBuilder:
+                              (context, index) => Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 4.0,
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Container(
+                                    width: 120,
+                                    color: Colors.grey[900],
+                                  ),
+                                ),
+                              ),
+                        ),
+                      ),
+                    ],
+                  );
+                }
+                if (snapshot.hasError) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 40),
+                    child: Center(
+                      child: Text(
+                        'Error: ${snapshot.error}',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  );
+                }
+                final sections = snapshot.data!;
+
+                final allImages =
+                    sections
+                        .map<String>((e) => e['mainImage'] as String)
+                        .toList();
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: SectionTitle(title: 'Contiune Watching for Eron'),
+                    ),
+                    HorizontalMovieList(imagePaths: allImages),
+                    const NetflixShopBannerWithSlider(),
+                  ],
+                );
+              },
+            ),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class HorizontalMovieList extends StatelessWidget {
+  final List<String> imagePaths;
+
+  const HorizontalMovieList({super.key, required this.imagePaths});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 200,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: imagePaths.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                imagePaths[index],
+                fit: BoxFit.cover,
+                errorBuilder:
+                    (context, error, stackTrace) =>
+                        const Icon(Icons.broken_image, color: Colors.red),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

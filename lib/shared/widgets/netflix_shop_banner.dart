@@ -71,7 +71,11 @@ class NetflixShopBannerWithSlider extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.shopping_bag, color: Colors.white, size: 40),
+                        const Icon(
+                          Icons.shopping_bag,
+                          color: Colors.white,
+                          size: 40,
+                        ),
                         const SizedBox(width: 8),
                         const Text(
                           'Shop',
@@ -135,9 +139,10 @@ class NetflixShopBannerWithSlider extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8),
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: index == images.length - 1
-                          ? const EdgeInsets.only(left: 8)
-                          : const EdgeInsets.only(left: 8, right: 0),
+                      margin:
+                          index == images.length - 1
+                              ? const EdgeInsets.only(left: 8)
+                              : const EdgeInsets.only(left: 8, right: 0),
                       width: 140,
                       child: Stack(
                         children: [
@@ -148,12 +153,17 @@ class NetflixShopBannerWithSlider extends StatelessWidget {
                               fit: BoxFit.cover,
                               width: double.infinity,
                               height: double.infinity,
-                              errorBuilder: (context, error, stackTrace) => Container(
-                                color: Colors.grey[300],
-                                child: const Center(
-                                  child: Icon(Icons.broken_image, color: Colors.red, size: 40),
-                                ),
-                              ),
+                              errorBuilder:
+                                  (context, error, stackTrace) => Container(
+                                    color: Colors.grey[300],
+                                    child: const Center(
+                                      child: Icon(
+                                        Icons.broken_image,
+                                        color: Colors.red,
+                                        size: 40,
+                                      ),
+                                    ),
+                                  ),
                             ),
                           ),
                           Positioned(
@@ -171,7 +181,11 @@ class NetflixShopBannerWithSlider extends StatelessWidget {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: const [
-                                  Icon(Icons.lock, color: Colors.white, size: 14),
+                                  Icon(
+                                    Icons.lock,
+                                    color: Colors.white,
+                                    size: 14,
+                                  ),
                                   SizedBox(width: 4),
                                   Text(
                                     'SHOP',
